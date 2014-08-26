@@ -118,14 +118,21 @@ After adding the items to the array, iterate the collection and println the
 **/
 // implement code for R5 below
 var products = [Product]()
-var product1: Product = Product(name: "product1", price: 1, discount: 0.3)
-var product2: Product = Product(name: "product2", price: 2, discount: 0.3)
-var product3: Product = Product(name: "product3", price: 3, discount: 0.3)
-var product4: Product = Product(name: "product4", price: 4, discount: 0.3)
-var product5: Product = Product(name: "product5", price: 5, discount: 0.3)
+var product1: Product = Product(name: "product1", price: 1.0, discount: 0.0)
+var product2: Product = Product(name: "product2", price: 2.0, discount: 0.1)
+var product3: Product = Product(name: "product3", price: 3.0, discount: 0.2)
+var product4: Product = Product(name: "product4", price: 4.0, discount: 0.4)
+var product5: Product = Product(name: "product5", price: 5.0, discount: 0.5)
 
+products.append(product1)
+products.append(product2)
+products.append(product3)
+products.append(product4)
+products.append(product5)
 
-
+for item in products {
+    println(item)
+}
 
 /**
 
