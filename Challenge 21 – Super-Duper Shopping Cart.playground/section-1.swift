@@ -104,7 +104,7 @@ class Product {
     }
 }
 
-var product: Product = Product(name: "Apple", price: 55, discount: 0.3)
+var product: Product = Product(name: "Apple", price: 55.0, discount: 0.3)
 
 
 /**
@@ -117,6 +117,13 @@ After adding the items to the array, iterate the collection and println the
 “saleStatus” for each item.
 **/
 // implement code for R5 below
+var products = [Product]()
+var product1: Product = Product(name: "product1", price: 1, discount: 0.3)
+var product2: Product = Product(name: "product2", price: 2, discount: 0.3)
+var product3: Product = Product(name: "product3", price: 3, discount: 0.3)
+var product4: Product = Product(name: "product4", price: 4, discount: 0.3)
+var product5: Product = Product(name: "product5", price: 5, discount: 0.3)
+
 
 
 
