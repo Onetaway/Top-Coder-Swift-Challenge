@@ -15,8 +15,8 @@ R2 – Create a “Customer” struct with a “name” and “email” property
 **/
 // implement code for R2 below
 struct Customer {
-    var name = ""
-    var email = ""
+    var name: String
+    var email: String
 }
 
 
@@ -51,10 +51,7 @@ func randomCustomer(customer1: Customer, customer2: Customer, customer3: Custome
     }
 }
 
-var customer1 = Customer(name: "Bill", email: "bill@gmail.com")
-var customer2 = Customer(name: "Tim", email: "tim@gmail.com")
-var customer3 = Customer(name: "John", email: "john@gmail.com")
-randomCustomer(customer1, customer2, customer3)
+
 
 
 /**
@@ -89,7 +86,7 @@ class Product {
             if self.discount == 0 {
                 return "Sorry. This product is not on sale."
             } else {
-                return "This product is on sale."
+                return "This product is on sale. It was \(self.price) but with a discount you only pay \(self.price * self.discount)."
             }
         }
     }
@@ -99,12 +96,12 @@ class Product {
         self.price = price
         self.discount = discount
         self.id = (Int)((arc4random() % 10000) + 1)
-        let random = arc4random() % 2
-        self.type = types[0]
+        let random: Int = (Int)(arc4random() % 2)
+        self.type = types[random]
     }
 }
 
-var product: Product = Product(name: "Apple", price: 55.0, discount: 0.3)
+
 
 
 /**
@@ -118,20 +115,20 @@ After adding the items to the array, iterate the collection and println the
 **/
 // implement code for R5 below
 var products = [Product]()
-var product1: Product = Product(name: "product1", price: 1.0, discount: 0.0)
-var product2: Product = Product(name: "product2", price: 2.0, discount: 0.1)
-var product3: Product = Product(name: "product3", price: 3.0, discount: 0.2)
-var product4: Product = Product(name: "product4", price: 4.0, discount: 0.4)
-var product5: Product = Product(name: "product5", price: 5.0, discount: 0.5)
+var product0: Product = Product(name: "product0", price: 1.0, discount: 0.0)
+var product1: Product = Product(name: "product1", price: 2.0, discount: 0.1)
+var product2: Product = Product(name: "product2", price: 3.0, discount: 0.2)
+var product3: Product = Product(name: "product3", price: 4.0, discount: 0.4)
+var product4: Product = Product(name: "product4", price: 5.0, discount: 0.5)
 
+products.append(product0)
 products.append(product1)
 products.append(product2)
 products.append(product3)
 products.append(product4)
-products.append(product5)
 
 for item in products {
-    println(item)
+    println(item.saleStatus)
 }
 
 /**
@@ -163,6 +160,58 @@ awesome customer!!”
 **/
 // implement code for R6 below
 
+class Cart<T> {
+    var customerName: String
+    var customerEmail: String
+    var items = [T]()
+    var itemCount: Int {
+        return self.items.count
+    }
+    var promoCode: String?
+    
+    init(customerName: String, customerEmail: String) {
+        self.customerName = customerName
+        self.customerEmail = customerEmail
+    }
+    
+    func add(item: T) {
+        self.items.append(item)
+    }
+    
+    func clear() {
+        self.items.removeAll(keepCapacity: false)
+    }
+    
+    func remove(position: Int) {
+        self.items.removeAtIndex(position)
+    }
+    
+    func getPromoCodeDisplay() -> String {
+        
+        if let result = self.promoCode {
+            return "Your promo code is \(result)"
+        } else {
+            return "You do not have a promo code."
+        }
+    }
+    
+    func getCartStatus() -> String {
+        let count = self.items.count
+        
+        switch count {
+        case 0:
+            return "You have no items in your cart."
+        case 1...3:
+            return "You have \(count) items in your cart."
+        default:
+            return "You are an awesome customer!!"
+        }
+    }
+    
+}
+
+
+
 
 
 /**
@@ -174,7 +223,16 @@ itemCount (should be 0). Println the getCartStatus which should display
 “You have no items in your cart.”
 **/
 // implement code for R7 below
+var customer1 = Customer(name: "Bill", email: "bill@gmail.com")
+var customer2 = Customer(name: "Tim", email: "tim@gmail.com")
+var customer3 = Customer(name: "John", email: "john@gmail.com")
+var customer: (name: String?, email: String?) = randomCustomer(customer1, customer2, customer3)
 
+
+var cart = Cart<Product> (customerName: customer.name!, customerEmail: customer.email!)
+customer.name!
+cart.itemCount
+cart.getCartStatus()
 
 
 /**
@@ -188,7 +246,18 @@ then println the getPromoCodeDisplay again (should display “Your promo code
 is 1234.”).
 **/
 // implement code for R8 below
+for var i = 0; i < products.count; i++ {
+    if 2 != i {
+        cart.add(products[i])
+    }
+}
 
+cart.itemCount
+cart.getCartStatus()
+
+cart.getPromoCodeDisplay()
+cart.promoCode = "1234"
+cart.getPromoCodeDisplay()
 
 
 /**
@@ -197,3 +266,10 @@ be 3) and println the getCartStatus which should display “You have 3 items
 in your cart.”
 **/
 // implement code for R9 below
+cart.remove(0)
+cart.itemCount
+cart.getCartStatus()
+
+
+
+
